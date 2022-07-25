@@ -8,6 +8,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -34,9 +35,15 @@ public void onPlayerJoin(PlayerJoinEvent event) {
     public void onBlockBreak(BlockBreakEvent event) {
         event.setCancelled(true);
     }
+
+
+
+@EventHandler(priority = EventPriority.HIGHEST)
+public void onBlockPlace(BlockPlaceEvent event) {
+    event.setCancelled(true);
 }
 
 
 
 
-
+}
