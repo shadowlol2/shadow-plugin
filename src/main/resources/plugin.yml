@@ -1,0 +1,7 @@
+name: Shadow
+version: '${project.version}'
+main: shadow.customplugin.shadow.Shadow
+api-version: 1.19
+authors: [ Shadow ]
+description: Shadows first advanced plugin
+website: main.shadow-sandbox.cf
