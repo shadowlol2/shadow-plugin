@@ -5,3 +5,15 @@ api-version: 1.19
 authors: [ Shadow ]
 description: Shadows first advanced plugin
 website: main.shadow-sandbox.cf
+
+commands:
+  inventory:
+    description: Opens a inventory gui
+    permission: OP
+    permission-message: u don't have perms idiot
+  trash:
+    description: A trash bin
+    permission: 'shadow.bin'
+
+
+
