@@ -14,6 +14,9 @@ commands:
   trash:
     description: A trash bin
     permission: 'shadow.bin'
+  term:
+    description: Gives  u an terminator like bow
+    permission: OP
 
 
 

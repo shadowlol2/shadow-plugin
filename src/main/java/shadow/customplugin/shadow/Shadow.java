@@ -14,10 +14,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.enchantments.Enchantment;
-import org.bukkit.enchantments.Enchantment;
+
 public final class Shadow extends JavaPlugin implements Listener {
 
     @Override
@@ -29,7 +26,9 @@ public final class Shadow extends JavaPlugin implements Listener {
         System.out.println("75%");
         System.out.println("100%");
         System.out.println("Shadow Plugin has start!");
-        getServer().getPluginManager().registerEvents(this, this); //handles the events
+        getServer().getPluginManager().registerEvents(this, this); //handles the event
+        ItemManager.init();
+        getCommand("term").setExecutor(new Commands());
     }
 
 
@@ -85,15 +84,15 @@ public void onBlockPlace(BlockPlaceEvent event) {
                 p.openInventory(trashgui);
                 p.sendMessage(ChatColor.DARK_RED + "Please Put Your Garbage inside of this gui");
             }
+
         }
             return false;
         }
 
-    
-    
-    
-    
-    
+
+
+
+
 
 
 
