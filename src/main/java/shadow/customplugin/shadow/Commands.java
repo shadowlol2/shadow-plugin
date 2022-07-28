@@ -14,6 +14,9 @@ public class Commands implements CommandExecutor {
                 if(cmd.getName().equalsIgnoreCase("term")) {
                     player.getInventory().addItem(ItemManager.TripleShotBow);
                 }
+                if (cmd.getName().equalsIgnoreCase("RulesSign")) {
+                    player.getInventory().addItem(ItemManager.RulesSign);
+                }
             } else {
                 sender.sendMessage("Only Opped Players Can do this sorry");
             }

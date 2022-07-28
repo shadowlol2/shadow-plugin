@@ -10,6 +10,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -29,17 +30,18 @@ public final class Shadow extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(this, this); //handles the event
         ItemManager.init();
         getCommand("term").setExecutor(new Commands());
+        getCommand("RulesSign").setExecutor(new Commands());
     }
 
 
-@EventHandler
-public void onPlayerJoin(PlayerJoinEvent event) {
-    System.out.println("A player has joined the server");
-    event.setJoinMessage(null); //Custom welcome message
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent event) {
+        System.out.println("A player has joined the server");
+        event.setJoinMessage(null); //Custom welcome message
 
 
-    
-}
+
+    }
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onBlockBreak(BlockBreakEvent event) {
         event.setCancelled(true);
@@ -47,11 +49,11 @@ public void onPlayerJoin(PlayerJoinEvent event) {
 
 
 
-@EventHandler(priority = EventPriority.HIGHEST)
-public void onBlockPlace(BlockPlaceEvent event) {
-    event.setCancelled(true);
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onBlockPlace(BlockPlaceEvent event) {
+        event.setCancelled(true);
 
-} //disables block placing
+    } //disables block placing
 //tt
 
     //Gives the player a weapon
@@ -60,22 +62,21 @@ public void onBlockPlace(BlockPlaceEvent event) {
     // private final Inventory gui = Bukkit.createInventory(null, 45, (ChatColor.DARK_GREEN + "Item GUI"));
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        final Inventory gui = Bukkit.createInventory(null, 9, (ChatColor.DARK_GREEN + "Item GUI"));
-        ItemStack swordMETA = new ItemStack(Material.DIAMOND_SWORD);
-        ItemStack Armormeta = new ItemStack(Material.DIAMOND_HELMET);
-        ItemStack Armormeta1 = new ItemStack(Material.DIAMOND_CHESTPLATE);
-        ItemStack Armormeta2 = new ItemStack(Material.DIAMOND_LEGGINGS);
-        ItemStack Armormeta3 = new ItemStack(Material.DIAMOND_BOOTS);
-        Armormeta2.setAmount(64);
-            if (sender instanceof Player) {
-                Player p = (Player) sender;
-                if (cmd.getName().equalsIgnoreCase("inventory")) {
-                    ItemStack[] menu_items = {swordMETA, Armormeta, Armormeta1, Armormeta2, Armormeta3};
-                    gui.setContents(menu_items);
-                    p.openInventory(gui);
-                    p.sendMessage("Please Take out an item");
-                }
+        final Inventory gui = Bukkit.createInventory(null, 27, (ChatColor.DARK_GREEN + "Rules GUI"));
+        ItemStack s1 = new ItemStack(Material.STAINED_GLASS_PANE);
+
+        if (sender instanceof Player) {
+            Player p = (Player) sender;
+
+            if (cmd.getName().equalsIgnoreCase("rules")) {
+                ItemStack[] menu_items = {ItemManager.S1blank , ItemManager.S1blank , ItemManager.S1blank , ItemManager.S1blank , ItemManager.S1blank , ItemManager.S1blank , ItemManager.S1blank , ItemManager.S1blank , ItemManager.S1blank ,
+                        ItemManager.S1blank , ItemManager.S1blank , ItemManager.S1blank , ItemManager.S1blank , ItemManager.RulesSign , ItemManager.S1blank , ItemManager.S1blank , ItemManager.S1blank , ItemManager.S1blank ,
+                        ItemManager.S1blank , ItemManager.S1blank , ItemManager.S1blank , ItemManager.S1blank , ItemManager.S1blank , ItemManager.S1blank , ItemManager.S1blank , ItemManager.S1blank , ItemManager.S1blank };
+                gui.setContents(menu_items);
+                p.openInventory(gui);
+                p.sendMessage("Please Hover over the rules sign");
             }
+        }
         final Inventory trashgui = Bukkit.createInventory(null, 54, (ChatColor.DARK_GREEN + "Trash GUI"));
 
         if (sender instanceof Player) {
@@ -86,23 +87,37 @@ public void onBlockPlace(BlockPlaceEvent event) {
             }
 
         }
-            return false;
+        return false;
+    }
+
+    @EventHandler
+    public void onClick(InventoryClickEvent e) {
+        Player p = (Player) e.getWhoClicked();
+        if (e.getInventory().getName().equalsIgnoreCase(ChatColor.DARK_GREEN + "Rules GUI")) {
+            e.setCancelled(true);
+            if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§c§lRules Menu!")) {
+                p.sendMessage("Yeah no u cannot do that :)");
+                p.setDisplayName(null);
+            }
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -7,16 +7,14 @@ description: Shadows first advanced plugin
 website: main.shadow-sandbox.cf
 
 commands:
-  inventory:
-    description: Opens a inventory gui
-    permission: OP
-    permission-message: u don't have perms idiot
+  rules:
+    description: Opens a rules gui
   trash:
     description: A trash bin
     permission: 'shadow.bin'
   term:
     description: Gives  u an terminator like bow
     permission: OP
-
-
+  RulesSign:
+    description: Gives u The Rules sign
 
