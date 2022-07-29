@@ -1,10 +1,13 @@
 package shadow.customplugin.shadow;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.LeatherArmorMeta;
 
 import java.util.ArrayList;
 
@@ -14,12 +17,14 @@ public static ItemStack RulesSign;
 public static ItemStack S1blank;
 public static ItemStack barrierblank;
 public static ItemStack randomitem;
+public static ItemStack Aotv;
 public static void init() {
 createTripleShotBow();
 CreateRulesMenu();
 CreateBlank();
 CreateBarrier();
 Randomitem();
+CreateAotv();
 }
 
 public static void createTripleShotBow() {
@@ -81,5 +86,71 @@ public static void createTripleShotBow() {
         meta.setLore(lore);
         item.setItemMeta(meta);
         randomitem = item;
+    }
+
+    public static void CreateAotv() {
+        ItemStack item = new ItemStack(Material.DIAMOND_SPADE);
+        ItemMeta meta = item.getItemMeta();
+        meta.setDisplayName("§6§lHEROIC ASPECT OF THE VOID");
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("§7Damage: §c120");
+        lore.add("§7Strength: §c140 §9(+40)");
+        lore.add("§7Crit Damage: §c50%");
+        lore.add("§7Bonus Attack Speed: §c5 §9(+5)");
+        lore.add("§7Intelligence: §c100");
+        lore.add("§7");
+        lore.add("§dUltimate Wise V");
+        lore.add("§7");
+        lore.add("§6Ability: Ether Transmission Ability §eRIGHT");
+        lore.add("§7Teleport to your targetted block\n" +
+                "up to §a61 blocks §7 away.\n" +
+                "§7Soulflow Cost: §31\n" +
+                "§7Mana Cost: §30");
+        lore.add("§7");
+        lore.add("§6§lLEGENDARY SWORD §7 §7 §7 §7 §7 §7");
+        meta.setLore(lore);
+        item.setItemMeta(meta);
+        Aotv = item;
+    }
+
+
+    public static ItemStack chest() {
+        ItemStack chest = new ItemStack(Material.LEATHER_CHESTPLATE);
+        ItemMeta meta0 = chest.hasItemMeta() ? chest.getItemMeta() : Bukkit.getItemFactory().getItemMeta(chest.getType());
+        LeatherArmorMeta leatherArmorMeta0 = (LeatherArmorMeta)meta0;
+        leatherArmorMeta0.setColor(Color.fromRGB(22, 138, 183));
+        leatherArmorMeta0.setDisplayName("Storm's Chestplate");
+        chest.setItemMeta(leatherArmorMeta0);
+        return chest;
+    }
+
+    public static ItemStack chestForGui() {
+        ItemStack chest = new ItemStack(Material.LEATHER_CHESTPLATE);
+        ItemMeta meta0 = chest.hasItemMeta() ? chest.getItemMeta() : Bukkit.getItemFactory().getItemMeta(chest.getType());
+        LeatherArmorMeta leatherArmorMeta0 = (LeatherArmorMeta)meta0;
+        leatherArmorMeta0.setColor(Color.fromRGB(22, 138, 183));
+        leatherArmorMeta0.setDisplayName("Storm's Armor");
+        chest.setItemMeta(leatherArmorMeta0);
+        return chest;
+    }
+
+    public static ItemStack leggings() {
+        ItemStack leggings = new ItemStack(Material.LEATHER_LEGGINGS);
+        ItemMeta meta1 = leggings.hasItemMeta() ? leggings.getItemMeta() : Bukkit.getItemFactory().getItemMeta(leggings.getType());
+        LeatherArmorMeta leatherArmorMeta1 = (LeatherArmorMeta)meta1;
+        leatherArmorMeta1.setColor(Color.fromRGB(21, 156, 181));
+        leatherArmorMeta1.setDisplayName("Storm's Leggings");
+        leggings.setItemMeta(leatherArmorMeta1);
+        return leggings;
+    }
+
+    public static ItemStack boots() {
+        ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
+        ItemMeta meta2 = boots.hasItemMeta() ? boots.getItemMeta() : Bukkit.getItemFactory().getItemMeta(boots.getType());
+        LeatherArmorMeta leatherArmorMeta2 = (LeatherArmorMeta)meta2;
+        leatherArmorMeta2.setColor(Color.fromRGB(27, 179, 212));
+        leatherArmorMeta2.setDisplayName("Storm's Boots");
+        boots.setItemMeta(leatherArmorMeta2);
+        return boots;
     }
 }

@@ -18,6 +18,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scoreboard.*;
+import shadow.customplugin.shadow.ItemEvents.TeleportSword;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +43,8 @@ public final class Shadow extends JavaPlugin implements Listener {
         getCommand("RulesSign").setExecutor(new Commands());
         getCommand("kill").setExecutor(new Commands());
         getCommand("gmc").setExecutor(new Commands());
-
+        this.getServer().getPluginManager().registerEvents(new TeleportSword(), this);
+        getCommand("boss1").setExecutor(new Commands());
     }
 
 
@@ -51,6 +53,11 @@ public final class Shadow extends JavaPlugin implements Listener {
         System.out.println("A player has joined the server");
         event.setJoinMessage(null); //Custom welcome message
 
+
+    }
+    @EventHandler
+    public  void onPlayerleave(PlayerQuitEvent event) {
+        event.setQuitMessage(null);
 
     }
 
@@ -94,7 +101,7 @@ public final class Shadow extends JavaPlugin implements Listener {
             Player p = (Player) sender;
             if (cmd.getName().equalsIgnoreCase("trash") || cmd.getName().equalsIgnoreCase("bin")) {
                 ItemStack[] menu_trash = {};
-                trashgui.setItem(44, ItemManager.randomitem);
+
                 trashgui.setItem(45, ItemManager.S1blank);
                 trashgui.setItem(46, ItemManager.S1blank);
                 trashgui.setItem(47, ItemManager.S1blank);
@@ -143,12 +150,13 @@ public final class Shadow extends JavaPlugin implements Listener {
             e.setCancelled(true);
             if (e.getRawSlot() == 13) {
                 //p.performCommand("kick _mo7_");
-                p.getInventory().addItem(ItemManager.RulesSign).clear();
+                p.getInventory().addItem(ItemManager.Aotv).clear();
                 return;
             }
         }
 
     }
+
 }
 
 
