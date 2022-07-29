@@ -28,6 +28,7 @@ public final class Shadow extends JavaPlugin implements Listener {
         System.out.println("100%");
         System.out.println("Shadow Plugin has start!");
         getServer().getPluginManager().registerEvents(this, this); //handles the event
+      //  getServer().getPluginManager().registerEvents(new GuiListner(), this);
         ItemManager.init();
         getCommand("term").setExecutor(new Commands());
         getCommand("RulesSign").setExecutor(new Commands());
@@ -71,7 +72,7 @@ public final class Shadow extends JavaPlugin implements Listener {
             if (cmd.getName().equalsIgnoreCase("rules")) {
                 ItemStack[] menu_items = {ItemManager.S1blank , ItemManager.S1blank , ItemManager.S1blank , ItemManager.S1blank , ItemManager.S1blank , ItemManager.S1blank , ItemManager.S1blank , ItemManager.S1blank , ItemManager.S1blank ,
                         ItemManager.S1blank , ItemManager.S1blank , ItemManager.S1blank , ItemManager.S1blank , ItemManager.RulesSign , ItemManager.S1blank , ItemManager.S1blank , ItemManager.S1blank , ItemManager.S1blank ,
-                        ItemManager.S1blank , ItemManager.S1blank , ItemManager.S1blank , ItemManager.S1blank , ItemManager.S1blank , ItemManager.S1blank , ItemManager.S1blank , ItemManager.S1blank , ItemManager.S1blank };
+                        ItemManager.S1blank , ItemManager.S1blank , ItemManager.S1blank , ItemManager.S1blank , ItemManager.barrierblank , ItemManager.S1blank , ItemManager.S1blank , ItemManager.S1blank , ItemManager.S1blank };
                 gui.setContents(menu_items);
                 p.openInventory(gui);
                 p.sendMessage("Please Hover over the rules sign");
@@ -82,6 +83,16 @@ public final class Shadow extends JavaPlugin implements Listener {
         if (sender instanceof Player) {
             Player p = (Player) sender;
             if (cmd.getName().equalsIgnoreCase("trash") || cmd.getName().equalsIgnoreCase("bin")) {
+               ItemStack[] menu_trash = {};
+                trashgui.setItem(45 , ItemManager.S1blank);
+                trashgui.setItem(46 , ItemManager.S1blank);
+                trashgui.setItem(47 , ItemManager.S1blank);
+               trashgui.setItem(48 , ItemManager.S1blank);
+                trashgui.setItem(49, ItemManager.barrierblank);
+                trashgui.setItem(50 , ItemManager.S1blank);
+                trashgui.setItem(51 , ItemManager.S1blank);
+                trashgui.setItem(52 , ItemManager.S1blank);
+                trashgui.setItem(53 , ItemManager.S1blank);
                 p.openInventory(trashgui);
                 p.sendMessage(ChatColor.DARK_RED + "Please Put Your Garbage inside of this gui");
             }
@@ -89,35 +100,33 @@ public final class Shadow extends JavaPlugin implements Listener {
         }
         return false;
     }
-
     @EventHandler
     public void onClick(InventoryClickEvent e) {
         Player p = (Player) e.getWhoClicked();
-        if (e.getInventory().getName().equalsIgnoreCase(ChatColor.DARK_GREEN + "Rules GUI")) {
+        if (e.getInventory().getName().equalsIgnoreCase(ChatColor.DARK_GREEN+ "Rules GUI")) {
             e.setCancelled(true);
             if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§c§lRules Menu!")) {
-                p.sendMessage("Yeah no u cannot do that :)");
-                p.setDisplayName(null);
+                e.setCancelled(true);
+            }
+            if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§c§lEXIT")) {
+                e.setCancelled(true);
+                p.closeInventory();
             }
         }
+        if (e.getInventory().getName().equalsIgnoreCase(ChatColor.DARK_GREEN+ "Trash GUI")) {
+            e.setCancelled(false);
+            if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§c§lEXIT")) {
+                  e.setCancelled(true);
+                  p.closeInventory();
+            }
+            if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§7")){
+                e.setCancelled(true);
+            }
+        }
+
+
+        }
     }
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
