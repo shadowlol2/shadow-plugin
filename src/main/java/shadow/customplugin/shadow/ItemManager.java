@@ -13,11 +13,13 @@ public static ItemStack TripleShotBow;
 public static ItemStack RulesSign;
 public static ItemStack S1blank;
 public static ItemStack barrierblank;
+public static ItemStack randomitem;
 public static void init() {
 createTripleShotBow();
 CreateRulesMenu();
 CreateBlank();
 CreateBarrier();
+Randomitem();
 }
 
 public static void createTripleShotBow() {
@@ -68,5 +70,16 @@ public static void createTripleShotBow() {
         meta.setLore(lore);
         item.setItemMeta(meta);
         barrierblank = item;
+    }
+
+    public static void Randomitem() {
+        ItemStack item = new ItemStack(Material.BARRIER);
+        ItemMeta meta = item.getItemMeta();
+        meta.setDisplayName("§c§lEXIT");
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("§7Click here to exit");
+        meta.setLore(lore);
+        item.setItemMeta(meta);
+        randomitem = item;
     }
 }

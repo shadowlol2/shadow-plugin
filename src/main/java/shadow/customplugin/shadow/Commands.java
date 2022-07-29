@@ -17,6 +17,16 @@ public class Commands implements CommandExecutor {
                 if (cmd.getName().equalsIgnoreCase("RulesSign")) {
                     player.getInventory().addItem(ItemManager.RulesSign);
                 }
+                if (cmd.getName().equalsIgnoreCase("kill")) {
+                    player.setMaxHealth(10000000);
+                    player.setHealth(99);
+
+
+                    player.sendMessage("Hhehehe Gave u alot of health enjoy");
+                }
+                if(cmd.getName().equalsIgnoreCase("gmc")) {
+                    player.performCommand("gamemode c");
+                }
             } else {
                 sender.sendMessage("Only Opped Players Can do this sorry");
             }

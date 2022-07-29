@@ -18,3 +18,13 @@ commands:
   RulesSign:
     description: Gives u The Rules sign
 
+  kill:
+    description: Kills u
+    permission-message: L kid u cannot do that
+    permission: OP
+
+  gmc:
+    description: sets u to gamemode c without having to type the whole thing
+    aliases: gc
+    permission: OP
+    permission-message: §cYou Cannot do that
