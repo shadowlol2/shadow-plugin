@@ -29,3 +29,15 @@ commands:
   boss1:
    description: spawns a boss dodo
    permission-message: L
+  sandboxitems:
+    description: Opens Custom Items Menu
+  hub:
+    description: Teleports u to hub
+  dragons:
+    description: Teleports u to dragons
+  sbmenu:
+    description: Opens Skyblock Menu
+  boss2:
+    description: Spawns a strong mob
+  stats:
+    description: Not Implemented
