@@ -1,4 +1,4 @@
-package shadow.customplugin.shadow;
+package shadow.customplugin.shadow.CustomItems;
 
 import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.Callable;
 
 public class ItemManager {
     public static ItemStack TripleShotBow;
@@ -22,6 +23,13 @@ public class ItemManager {
     public static ItemStack randomitem;
     public static ItemStack Aotv;
     public static ItemStack bobsword;
+    public static ItemStack CollectionItem;
+   public static ItemStack RecipeBook;
+    public static ItemStack Petsitem;
+    public static ItemStack StorageItem;
+    public static ItemStack Wardrobe;
+    public static ItemStack Customitems;
+
 
     public static void init() {
         createTripleShotBow();
@@ -31,6 +39,12 @@ public class ItemManager {
         Randomitem();
         CreateAotv();
         CreateBobSword();
+        CreateCollectionItem();
+        CreateRecipeBook();
+        CreateStroageItem();
+        CreatePetsItem();
+        CreateWardrobeItem();
+        Createcustomitems();
     }
 
     public static void createTripleShotBow() {
@@ -175,13 +189,14 @@ public class ItemManager {
         pigskull.setItemMeta(meta);
         return pigskull;
     }
+
     public static void CreateBobSword() {
         ItemStack item = new ItemStack(Material.DIAMOND_SWORD);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName(ChatColor.GREEN + "Your Skills");
         meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         ArrayList<String> lore = new ArrayList<>();
-        lore.add(ChatColor.GRAY+ "Click on The Sword " +
+        lore.add(ChatColor.GRAY + "Click on The Sword " +
                 "to view Your skills");
 
         meta.setLore(lore);
@@ -189,5 +204,90 @@ public class ItemManager {
 
         bobsword = item;
     }
-}
 
+    public static void CreateCollectionItem() {
+        ItemStack item = new ItemStack(Material.PAINTING);
+        ItemMeta meta = item.getItemMeta();
+        meta.setDisplayName(ChatColor.GREEN + "Collections");
+        meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add(ChatColor.GRAY + "Collections Menu " +
+                "to view All skyblock " +
+                "collections");
+
+        meta.setLore(lore);
+        item.setItemMeta(meta);
+        CollectionItem = item;
+    }
+    public static void CreateRecipeBook() {
+        ItemStack item = new ItemStack(Material.BOOK);
+        ItemMeta meta = item.getItemMeta();
+        meta.setDisplayName(ChatColor.GREEN + "Recipe Book");
+        meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add(ChatColor.GRAY + "All recipes for hypixel skyblock");
+
+        meta.setLore(lore);
+        item.setItemMeta(meta);
+        RecipeBook = item;
+    }
+    public static void CreateStroageItem() {
+        ItemStack item = new ItemStack(Material.ENDER_CHEST);
+        ItemMeta meta = item.getItemMeta();
+        meta.setDisplayName(ChatColor.GREEN + "Storage");
+        meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add(ChatColor.GRAY + "Click on the Ender Chest to open Storage Menu");
+
+        meta.setLore(lore);
+        item.setItemMeta(meta);
+        StorageItem = item;
+    }
+    public static void CreatePetsItem() {
+        ItemStack item = new ItemStack(Material.BONE);
+        ItemMeta meta = item.getItemMeta();
+        meta.setDisplayName(ChatColor.GREEN + "Pets");
+        meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add(ChatColor.GRAY + "Click To Open Your pets menu");
+
+        meta.setLore(lore);
+        item.setItemMeta(meta);
+        Petsitem = item;
+    }
+
+    public static void CreateWardrobeItem() {
+        ItemStack item = new ItemStack(Material.LEATHER_CHESTPLATE);
+        ItemMeta meta = item.getItemMeta();
+        meta.setDisplayName(ChatColor.GREEN + "Wardrobe");
+        meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add(ChatColor.GRAY + "Click To Open Your Wardrobe menu");
+
+        meta.setLore(lore);
+        item.setItemMeta(meta);
+        Wardrobe = item;
+    }
+
+    public static void Createcustomitems() {
+        ItemStack item = new ItemStack(Material.BOOK);
+        ItemMeta meta = item.getItemMeta();
+        meta.setDisplayName(ChatColor.GREEN + "Custom Items");
+        meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add(ChatColor.GRAY + "Click To Open the custom items Menu");
+
+        meta.setLore(lore);
+        item.setItemMeta(meta);
+        Customitems = item;
+    }
+
+
+
+
+
+
+
+
+
+}

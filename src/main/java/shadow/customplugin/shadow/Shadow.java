@@ -1,13 +1,17 @@
 package shadow.customplugin.shadow;
+import me.clip.placeholderapi.expansion.PlaceholderExpansion;
+
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.Inventory;
@@ -15,8 +19,14 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 import shadow.customplugin.shadow.Commands.Commands;
+import shadow.customplugin.shadow.Commands.GiveCoins;
+import shadow.customplugin.shadow.Commands.MainHologram;
+import shadow.customplugin.shadow.Commands.TeleportGuiCommand;
+import shadow.customplugin.shadow.CustomItems.ItemManager;
 import shadow.customplugin.shadow.DamageListeners.Aotvdamage;
 import shadow.customplugin.shadow.GuiListeners.GuiListnerforall;
+import shadow.customplugin.shadow.GuiListeners.ItemsMenuListner;
+import shadow.customplugin.shadow.GuiListeners.TeleportmenuGuilistner;
 import shadow.customplugin.shadow.ItemEvents.TeleportSword;
 
 import java.util.ArrayList;
@@ -38,7 +48,7 @@ public final class Shadow extends JavaPlugin implements Listener {
         ItemManager.init();
         getCommand("term").setExecutor(new Commands());
         getCommand("RulesSign").setExecutor(new Commands());
-        getCommand("kill").setExecutor(new Commands());
+        //    getCommand("kill").setExecutor(new Commands());
         getCommand("gmc").setExecutor(new Commands());
         this.getServer().getPluginManager().registerEvents(new TeleportSword(), this);
         getCommand("boss1").setExecutor(new Commands());
@@ -46,6 +56,19 @@ public final class Shadow extends JavaPlugin implements Listener {
         getCommand("boss2").setExecutor(new Commands());
         this.getServer().getPluginManager().registerEvents(new Aotvdamage(), this);
         this.getServer().getPluginManager().registerEvents(new GuiListnerforall(), this);
+        this.getServer().getPluginManager().registerEvents(new ItemsMenuListner(), this);
+        getServer().getPluginManager().registerEvents(new TeleportmenuGuilistner(), this);
+        if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
+            //Registering placeholder will be use here
+
+        }
+        getCommand("mainhologram").setExecutor(new MainHologram());
+        getCommand("tpmenu").setExecutor(new TeleportGuiCommand());
+        getCommand("dragons").setExecutor(new Commands());
+        getCommand("givecoins").setExecutor(new GiveCoins());
+        getConfig().options().copyDefaults();
+        saveDefaultConfig();
+
     }
 
 
@@ -83,7 +106,7 @@ public final class Shadow extends JavaPlugin implements Listener {
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         Player player = (Player) sender;
-        if(cmd.getName().equalsIgnoreCase("stats")) {
+        if (cmd.getName().equalsIgnoreCase("stats")) {
             player.sendMessage(ChatColor.RED + "Not implemented yeet");
         }
         final Inventory gui = Bukkit.createInventory(null, 27, (ChatColor.DARK_GREEN + "Rules GUI"));
@@ -159,7 +182,7 @@ public final class Shadow extends JavaPlugin implements Listener {
                 if (cmd.getName().equalsIgnoreCase("sbmenu")) {
                     ItemStack[] menu_trash = {};
                     ItemStack skull = new ItemStack(Material.SKULL_ITEM, 1);
-                    skull.setDurability((short)3);
+                    skull.setDurability((short) 3);
                     SkullMeta skullMeta = (SkullMeta) skull.getItemMeta();
                     skullMeta.setOwner(p.getName());
                     skullMeta.setDisplayName(ChatColor.GREEN + "Your Skyblock Profile");
@@ -171,7 +194,7 @@ public final class Shadow extends JavaPlugin implements Listener {
                     skullMeta.setLore(lore);
                     skull.setItemMeta(skullMeta);
 
-                  sbmenugui.setItem(0, ItemManager.S1blank);
+                    sbmenugui.setItem(0, ItemManager.S1blank);
                     sbmenugui.setItem(1, ItemManager.S1blank);
                     sbmenugui.setItem(2, ItemManager.S1blank);
                     sbmenugui.setItem(3, ItemManager.S1blank);
@@ -184,16 +207,56 @@ public final class Shadow extends JavaPlugin implements Listener {
                     sbmenugui.setItem(10, ItemManager.S1blank);
                     sbmenugui.setItem(11, ItemManager.S1blank);
                     sbmenugui.setItem(12, ItemManager.S1blank);
-                    sbmenugui.setItem(13 , skull);
+                    sbmenugui.setItem(13, skull);
                     sbmenugui.setItem(14, ItemManager.S1blank);
                     sbmenugui.setItem(15, ItemManager.S1blank);
                     sbmenugui.setItem(16, ItemManager.S1blank);
                     sbmenugui.setItem(17, ItemManager.S1blank);
                     sbmenugui.setItem(18, ItemManager.S1blank);
-                    sbmenugui.setItem(19, ItemManager.bobsword );
+                    sbmenugui.setItem(19, ItemManager.bobsword);
+                    sbmenugui.setItem(20, ItemManager.CollectionItem);
+                    sbmenugui.setItem(21, ItemManager.RecipeBook);
+                  /* sbmenugui.setItem(22, ItemManager.S1blank);
+                    sbmenugui.setItem(23, ItemManager.S1blank);
+                    sbmenugui.setItem(24, ItemManager.S1blank);
+                    sbmenugui.setItem(25, ItemManager.S1blank);*/
+                    sbmenugui.setItem(25, ItemManager.StorageItem);
+                    sbmenugui.setItem(26, ItemManager.S1blank);
+                    sbmenugui.setItem(27, ItemManager.S1blank);
+
+                    sbmenugui.setItem(28, ItemManager.S1blank);
+                    sbmenugui.setItem(29, ItemManager.S1blank);
+                    sbmenugui.setItem(30, ItemManager.Petsitem);
+                    // sbmenugui.setItem(31, ItemManager.S1blank);
+                    sbmenugui.setItem(32, ItemManager.Wardrobe);
+                    sbmenugui.setItem(33, ItemManager.S1blank);
+                    sbmenugui.setItem(34, ItemManager.S1blank);
+                    sbmenugui.setItem(35, ItemManager.S1blank);
+                    sbmenugui.setItem(35, ItemManager.S1blank);
+                    sbmenugui.setItem(36, ItemManager.S1blank);
+                    sbmenugui.setItem(37, ItemManager.S1blank);
+                    sbmenugui.setItem(38, ItemManager.S1blank);
+                    sbmenugui.setItem(39, ItemManager.S1blank);
+                    sbmenugui.setItem(40, ItemManager.S1blank);
+                    sbmenugui.setItem(41, ItemManager.S1blank);
+                    sbmenugui.setItem(42, ItemManager.S1blank);
+                    sbmenugui.setItem(43, ItemManager.S1blank);
+                    sbmenugui.setItem(44, ItemManager.S1blank);
+                    sbmenugui.setItem(45, ItemManager.Customitems);
+                    sbmenugui.setItem(46, ItemManager.S1blank);
+                    sbmenugui.setItem(47, ItemManager.S1blank);
+                    sbmenugui.setItem(48, ItemManager.S1blank);
+                    sbmenugui.setItem(49, ItemManager.S1blank);
+                    sbmenugui.setItem(50, ItemManager.S1blank);
+                    sbmenugui.setItem(51, ItemManager.S1blank);
+                    sbmenugui.setItem(52, ItemManager.S1blank);
+                    sbmenugui.setItem(53, ItemManager.S1blank);
+
+
                     sbmenugui.setItem(49, ItemManager.barrierblank);
 
                     p.openInventory(sbmenugui);
+
 
                 }
             }
@@ -205,14 +268,7 @@ public final class Shadow extends JavaPlugin implements Listener {
     }
 
 
-
-
-
-
-
 }
-
-
 
 
 

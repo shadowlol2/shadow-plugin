@@ -41,3 +41,9 @@ commands:
     description: Spawns a strong mob
   stats:
     description: Not Implemented
+  mainhologram:
+    description: spawns shadow sandbox hologram
+  tpmenu:
+    description: Opens A tp menu GUI
+  givecoins:
+    description: Gives You 100000000 coins
