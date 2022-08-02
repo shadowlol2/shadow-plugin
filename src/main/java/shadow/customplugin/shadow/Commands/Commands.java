@@ -2,18 +2,17 @@ package shadow.customplugin.shadow.Commands;
 
 
 import org.bukkit.ChatColor;
+import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.*;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import shadow.customplugin.shadow.ItemManager;
+import shadow.customplugin.shadow.CustomItems.ItemManager;
 
 public class Commands implements CommandExecutor {
     @Override
@@ -54,17 +53,21 @@ public class Commands implements CommandExecutor {
                 }
                 if (cmd.getName().equalsIgnoreCase("boss2")) {
                     Zombie zombie = (Zombie)player.getWorld().spawn(player.getLocation(), Zombie.class);
-                    zombie.setMaxHealth(2048);
-                    zombie.setHealth(2048);
+                    zombie.setMaxHealth(15000000);
+                    zombie.setHealth(15000000);
                     ItemStack stick = new ItemStack(Material.STICK);
                     zombie.getEquipment().setBoots(new ItemStack(ItemManager.boots()));
                     // zombie.getEquipment().setHelmet(new ItemStack(ItemManager.));
                     zombie.getEquipment().setChestplate(new ItemStack(ItemManager.chest()));
                     zombie.getEquipment().setLeggings(new ItemStack(ItemManager.leggings()));
                     zombie.getEquipment().setItemInHand(stick);
-                    zombie.setCustomName("Shadow Giant" + zombie.getHealth());
+                    zombie.setCustomName("Shadow Giant " + zombie.getHealth());
                     zombie.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 1000000, 1));
                     zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 1));
+               zombie.setBaby(false);
+               zombie.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 10000 , 10000));
+               zombie.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 1000 , 1000000));
+
                 }
                 if(cmd.getName().equalsIgnoreCase("hub")) {
                     Location location = new Location(player.getWorld(), -2.5,70, -67.5 , 180 , 0);
@@ -74,8 +77,9 @@ public class Commands implements CommandExecutor {
 
                 }
                 if(cmd.getName().equalsIgnoreCase("dragons")) {
-                    Location location = new Location(player.getWorld(), 978, 1 ,-10, 180 , 0);
+                    Location location = new Location(player.getWorld(), -604, 22 ,-275, 90 , 2);
                     player.teleport(location);
+                    player.sendMessage(ChatColor.RED + "§lTeleported you to Dragons Nest");
                 }
 
             } else {
