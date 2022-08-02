@@ -24,8 +24,8 @@ commands:
   gmc:
     description: sets u to gamemode c without having to type the whole thing
     aliases: gc
-    permission: OP
-    permission-message: §cYou Cannot do that
+    permission: 'shadow.gmc'
+    permission-message: §c§lYou Cannot do that
   boss1:
    description: spawns a boss dodo
    permission-message: L
@@ -47,3 +47,8 @@ commands:
     description: Opens A tp menu GUI
   givecoins:
     description: Gives You 100000000 coins
+  reloadserver:
+    description: Reloads Server
+  gms:
+    description: Sets Your gamemode to survival
+    permission: 'shadow.gms'

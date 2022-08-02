@@ -12,12 +12,15 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import shadow.customplugin.shadow.Commands.Commands;
 import shadow.customplugin.shadow.Commands.GiveCoins;
 import shadow.customplugin.shadow.Commands.MainHologram;
@@ -30,6 +33,7 @@ import shadow.customplugin.shadow.GuiListeners.TeleportmenuGuilistner;
 import shadow.customplugin.shadow.ItemEvents.TeleportSword;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public final class Shadow extends JavaPlugin implements Listener {
@@ -54,6 +58,7 @@ public final class Shadow extends JavaPlugin implements Listener {
         getCommand("boss1").setExecutor(new Commands());
         getCommand("hub").setExecutor(new Commands());
         getCommand("boss2").setExecutor(new Commands());
+        getCommand("gms").setExecutor(new Commands());
         this.getServer().getPluginManager().registerEvents(new Aotvdamage(), this);
         this.getServer().getPluginManager().registerEvents(new GuiListnerforall(), this);
         this.getServer().getPluginManager().registerEvents(new ItemsMenuListner(), this);
@@ -66,9 +71,23 @@ public final class Shadow extends JavaPlugin implements Listener {
         getCommand("tpmenu").setExecutor(new TeleportGuiCommand());
         getCommand("dragons").setExecutor(new Commands());
         getCommand("givecoins").setExecutor(new GiveCoins());
+        getCommand("reloadserver").setExecutor(new Commands());
         getConfig().options().copyDefaults();
         saveDefaultConfig();
 
+
+        //for anti swear
+        if (!getConfig().contains("words")) {
+            List<String> words = new ArrayList<String>();
+            words.add("fuck");
+            words.add("shit");
+            words.add("Dick");
+            words.add("nigger");
+            words.add("fucked");
+            words.add("bitch");
+            words.add("deez");
+            getConfig().set("words", words);
+        }
     }
 
 
@@ -94,9 +113,11 @@ public final class Shadow extends JavaPlugin implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onBlockPlace(BlockPlaceEvent event) {
-        event.setCancelled(true);
+        Player player = event.getPlayer();
+            event.setCancelled(true);
 
-    } //disables block placing
+        }
+     //disables block placing
 //tt
 
     //Gives the player a weapon
@@ -227,7 +248,7 @@ public final class Shadow extends JavaPlugin implements Listener {
                     sbmenugui.setItem(28, ItemManager.S1blank);
                     sbmenugui.setItem(29, ItemManager.S1blank);
                     sbmenugui.setItem(30, ItemManager.Petsitem);
-                    // sbmenugui.setItem(31, ItemManager.S1blank);
+                    sbmenugui.setItem(31, ItemManager.customworkbench);
                     sbmenugui.setItem(32, ItemManager.Wardrobe);
                     sbmenugui.setItem(33, ItemManager.S1blank);
                     sbmenugui.setItem(34, ItemManager.S1blank);
@@ -267,7 +288,25 @@ public final class Shadow extends JavaPlugin implements Listener {
         return false;
     }
 
+    @EventHandler
+    public void onPlayerChat(AsyncPlayerChatEvent e) {
+        String msg = e.getMessage();
+        List<String> words = getConfig().getStringList("words");
+        for (int i = 0; i < words.size(); i++) {
+            if (msg.contains(words.get(i))) {
+                e.setCancelled(true);
+                e.getPlayer().sendMessage("You are not allowed to swear!");
+            }
+        }
 
+        if (msg.contains("Hi")) {
+            e.setCancelled(false);
+            e.getPlayer().sendMessage("Hello : " + e.getPlayer().getName());
+        }
+        if(msg.contains("Your game mode has been updated")) {
+            e.setCancelled(true);
+        }
+    }
 }
 
 

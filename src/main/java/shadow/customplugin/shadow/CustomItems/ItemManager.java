@@ -29,6 +29,7 @@ public class ItemManager {
     public static ItemStack StorageItem;
     public static ItemStack Wardrobe;
     public static ItemStack Customitems;
+    public static ItemStack customworkbench;
 
 
     public static void init() {
@@ -45,6 +46,7 @@ public class ItemManager {
         CreatePetsItem();
         CreateWardrobeItem();
         Createcustomitems();
+        CreateWorkbenchitem();
     }
 
     public static void createTripleShotBow() {
@@ -282,12 +284,16 @@ public class ItemManager {
         Customitems = item;
     }
 
+public static void CreateWorkbenchitem() {
+        ItemStack item = new ItemStack(Material.WORKBENCH);
+        ItemMeta meta = item.getItemMeta();
+        meta.setDisplayName(ChatColor.GREEN + "Workbench");
+        meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add(ChatColor.GRAY + "Click To Open the Workbench to craft custom items");
 
-
-
-
-
-
-
-
+        meta.setLore(lore);
+        item.setItemMeta(meta);
+        customworkbench = item;
+    }
 }

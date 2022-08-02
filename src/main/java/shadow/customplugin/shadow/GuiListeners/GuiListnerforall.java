@@ -21,6 +21,7 @@ public class GuiListnerforall implements Listener {
         }
 
     }
+
     @EventHandler
     public void onClick(InventoryClickEvent e) {
         Player p = (Player) e.getWhoClicked();
@@ -88,23 +89,32 @@ public class GuiListnerforall implements Listener {
                 if (e.getRawSlot() == 32) {
                     p.performCommand("wardrobe");
                 }
-                    if (e.getRawSlot() == 30) {
-                        p.performCommand("pets");
-                    }
-                if(e.getRawSlot() == 45) {
+                if (e.getRawSlot() == 30) {
+                    p.performCommand("pets");
+                }
+                if (e.getRawSlot() == 45) {
                     p.performCommand("ci");
 
                 }
+                if (e.getRawSlot() == 31) {
+                    p.performCommand("workbench");
                 }
             }
+        }
         if (inventory.getTitle().equalsIgnoreCase("Your Skills")) {
-          if(e.getRawSlot() == 48) {
-              p.performCommand("sbmenu");
-          }
-          e.getInventory().setItem(45, ItemManager.S1blank);
+            if (e.getRawSlot() == 48) {
+                p.performCommand("sbmenu");
+            }
+            e.getInventory().setItem(45, ItemManager.S1blank);
+        }
+        if (inventory.getTitle().equalsIgnoreCase("Custom Crafting")) {
+            e.getInventory().setItem(49, ItemManager.barrierblank);
+        if (e.getRawSlot() == 49 ){
+            p.performCommand("sbmenu");
         }
         }
 
 
     }
+}
 
