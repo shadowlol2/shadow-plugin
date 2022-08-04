@@ -21,10 +21,8 @@ import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import shadow.customplugin.shadow.Commands.Commands;
-import shadow.customplugin.shadow.Commands.GiveCoins;
-import shadow.customplugin.shadow.Commands.MainHologram;
-import shadow.customplugin.shadow.Commands.TeleportGuiCommand;
+import shadow.customplugin.shadow.Commands.*;
+import shadow.customplugin.shadow.CustomItems.GodPot;
 import shadow.customplugin.shadow.CustomItems.ItemManager;
 import shadow.customplugin.shadow.DamageListeners.Aotvdamage;
 import shadow.customplugin.shadow.GuiListeners.GuiListnerforall;
@@ -55,6 +53,7 @@ public final class Shadow extends JavaPlugin implements Listener {
         //    getCommand("kill").setExecutor(new Commands());
         getCommand("gmc").setExecutor(new Commands());
         this.getServer().getPluginManager().registerEvents(new TeleportSword(), this);
+        this.getServer().getPluginManager().registerEvents(new GodPot(), this);
         getCommand("boss1").setExecutor(new Commands());
         getCommand("hub").setExecutor(new Commands());
         getCommand("boss2").setExecutor(new Commands());
@@ -72,6 +71,8 @@ public final class Shadow extends JavaPlugin implements Listener {
         getCommand("dragons").setExecutor(new Commands());
         getCommand("givecoins").setExecutor(new GiveCoins());
         getCommand("reloadserver").setExecutor(new Commands());
+        getCommand("clearchat").setExecutor(new ClearChat());
+
         getConfig().options().copyDefaults();
         saveDefaultConfig();
 
@@ -96,7 +97,6 @@ public final class Shadow extends JavaPlugin implements Listener {
         System.out.println("A player has joined the server");
         event.setJoinMessage(null); //Custom welcome message
 
-
     }
 
     @EventHandler
@@ -107,15 +107,24 @@ public final class Shadow extends JavaPlugin implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onBlockBreak(BlockBreakEvent event) {
-        event.setCancelled(true);
-    } //disables blocks breaking
+        if (event.getPlayer().getName().equalsIgnoreCase("_mo7_")) {
+            event.setCancelled(true);
+        } else {
+            if(!event.getPlayer().getName().equalsIgnoreCase("_mo7_"))
+            event.setCancelled(true);
+        }
+    }
 
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onBlockPlace(BlockPlaceEvent event) {
         Player player = event.getPlayer();
+        if (event.getPlayer().getName().equalsIgnoreCase("_mo7_")) {
             event.setCancelled(true);
-
+        } else {
+            if(!event.getPlayer().getName().equalsIgnoreCase("_mo7_"))
+                event.setCancelled(true);
+        }
         }
      //disables block placing
 //tt
@@ -295,7 +304,7 @@ public final class Shadow extends JavaPlugin implements Listener {
         for (int i = 0; i < words.size(); i++) {
             if (msg.contains(words.get(i))) {
                 e.setCancelled(true);
-                e.getPlayer().sendMessage("You are not allowed to swear!");
+                e.getPlayer().sendMessage(ChatColor.RED + "&lYou are not allowed to swear!");
             }
         }
 

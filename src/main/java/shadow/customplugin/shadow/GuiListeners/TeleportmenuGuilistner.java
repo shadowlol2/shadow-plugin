@@ -31,10 +31,10 @@ public class TeleportmenuGuilistner implements Listener {
         }
         if (inventory.getTitle().equalsIgnoreCase(ChatColor.LIGHT_PURPLE + "Teleport Menu")) {
 
-            if (e.getRawSlot() == 1) {
+            if (e.getRawSlot() == 0) {
           p.performCommand("dragons");
             }
-            if (e.getRawSlot() == 2) {
+            if (e.getRawSlot() == 1) {
           p.performCommand("hub");
             }
 

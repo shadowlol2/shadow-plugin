@@ -25,11 +25,11 @@ public class TeleportGuiCommand implements CommandExecutor {
                 dragegg.setItemMeta(metadragegg);
 
                 ItemStack hubspawn = new ItemStack(Material.DRAGON_EGG);
-                ItemMeta hubspawnmeta= dragegg.getItemMeta();
+                ItemMeta hubspawnmeta= hubspawn.getItemMeta();
                 hubspawnmeta.setDisplayName(ChatColor.RED + "Warp to Hub");
-                dragegg.setItemMeta(hubspawnmeta);
-               teleportgui.setItem(1 , dragegg);
-               teleportgui.setItem(2, hubspawn);
+                hubspawn.setItemMeta(hubspawnmeta);
+               teleportgui.setItem(0 , dragegg);
+               teleportgui.setItem(1 , hubspawn);
                 teleportgui.setItem(45, ItemManager.S1blank);
                 teleportgui.setItem(46, ItemManager.S1blank);
                 teleportgui.setItem(47, ItemManager.S1blank);

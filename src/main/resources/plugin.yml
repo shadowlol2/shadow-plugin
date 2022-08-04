@@ -52,3 +52,8 @@ commands:
   gms:
     description: Sets Your gamemode to survival
     permission: 'shadow.gms'
+  clearchat:
+    description: Clears The chat
+    permission: OP
+    permission-message: You cannot do that
+

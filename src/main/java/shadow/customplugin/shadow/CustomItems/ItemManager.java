@@ -30,6 +30,8 @@ public class ItemManager {
     public static ItemStack Wardrobe;
     public static ItemStack Customitems;
     public static ItemStack customworkbench;
+    public static ItemStack sceptre;
+    public static ItemStack godPot;
 
 
     public static void init() {
@@ -47,6 +49,8 @@ public class ItemManager {
         CreateWardrobeItem();
         Createcustomitems();
         CreateWorkbenchitem();
+        createSceptre();
+        createGodPot();
     }
 
     public static void createTripleShotBow() {
@@ -296,4 +300,23 @@ public static void CreateWorkbenchitem() {
         item.setItemMeta(meta);
         customworkbench = item;
     }
+    private static void createSceptre(){
+        ItemStack item4 = new ItemStack(Material.YELLOW_FLOWER, 1);
+        ItemMeta meta = item4.getItemMeta();
+        meta.setDisplayName("Spirit Sceptre");
+        item4.setItemMeta(meta);
+        sceptre = item4;
+
+    }
+
+    private static void createGodPot() {
+        ItemStack item = new ItemStack(Material.NETHER_STAR, 1);
+        ItemMeta meta = item.getItemMeta();
+
+        meta.setDisplayName("God Potion");
+        item.setItemMeta(meta);
+        godPot = item;
+    }
+
+
 }
