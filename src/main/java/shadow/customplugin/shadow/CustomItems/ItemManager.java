@@ -1,19 +1,16 @@
 package shadow.customplugin.shadow.CustomItems;
 
+import com.mojang.authlib.GameProfile;
+import com.mojang.authlib.properties.Property;
 import org.bukkit.*;
-import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.Callable;
+import java.lang.reflect.Field;
+import java.util.*;
 
 public class ItemManager {
     public static ItemStack TripleShotBow;
@@ -24,7 +21,7 @@ public class ItemManager {
     public static ItemStack Aotv;
     public static ItemStack bobsword;
     public static ItemStack CollectionItem;
-   public static ItemStack RecipeBook;
+    public static ItemStack RecipeBook;
     public static ItemStack Petsitem;
     public static ItemStack StorageItem;
     public static ItemStack Wardrobe;
@@ -50,7 +47,6 @@ public class ItemManager {
         Createcustomitems();
         CreateWorkbenchitem();
         createSceptre();
-        createGodPot();
     }
 
     public static void createTripleShotBow() {
@@ -225,6 +221,7 @@ public class ItemManager {
         item.setItemMeta(meta);
         CollectionItem = item;
     }
+
     public static void CreateRecipeBook() {
         ItemStack item = new ItemStack(Material.BOOK);
         ItemMeta meta = item.getItemMeta();
@@ -237,6 +234,7 @@ public class ItemManager {
         item.setItemMeta(meta);
         RecipeBook = item;
     }
+
     public static void CreateStroageItem() {
         ItemStack item = new ItemStack(Material.ENDER_CHEST);
         ItemMeta meta = item.getItemMeta();
@@ -249,6 +247,7 @@ public class ItemManager {
         item.setItemMeta(meta);
         StorageItem = item;
     }
+
     public static void CreatePetsItem() {
         ItemStack item = new ItemStack(Material.BONE);
         ItemMeta meta = item.getItemMeta();
@@ -288,7 +287,7 @@ public class ItemManager {
         Customitems = item;
     }
 
-public static void CreateWorkbenchitem() {
+    public static void CreateWorkbenchitem() {
         ItemStack item = new ItemStack(Material.WORKBENCH);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName(ChatColor.GREEN + "Workbench");
@@ -300,7 +299,8 @@ public static void CreateWorkbenchitem() {
         item.setItemMeta(meta);
         customworkbench = item;
     }
-    private static void createSceptre(){
+
+    private static void createSceptre() {
         ItemStack item4 = new ItemStack(Material.YELLOW_FLOWER, 1);
         ItemMeta meta = item4.getItemMeta();
         meta.setDisplayName("Spirit Sceptre");
@@ -309,14 +309,18 @@ public static void CreateWorkbenchitem() {
 
     }
 
-    private static void createGodPot() {
-        ItemStack item = new ItemStack(Material.NETHER_STAR, 1);
-        ItemMeta meta = item.getItemMeta();
+    /*private static void createGodPot() {
+        ItemStack head = new ItemStack(Material.SKULL_ITEM, 1, (short)3);
+        SkullMeta meta = (SkullMeta) head.getItemMeta();
+        GameProfile profile = new GameProfile(UUID.randomUUID(), "");
 
+
+
+        item.setAmount(1);
         meta.setDisplayName("God Potion");
         item.setItemMeta(meta);
         godPot = item;
     }
-
+*/
 
 }

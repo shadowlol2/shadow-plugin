@@ -2,6 +2,7 @@ package shadow.customplugin.shadow;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 
 import org.bukkit.Bukkit;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.*;
 import org.bukkit.command.Command;
@@ -10,6 +11,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockIgniteEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
@@ -29,7 +31,10 @@ import shadow.customplugin.shadow.GuiListeners.GuiListnerforall;
 import shadow.customplugin.shadow.GuiListeners.ItemsMenuListner;
 import shadow.customplugin.shadow.GuiListeners.TeleportmenuGuilistner;
 import shadow.customplugin.shadow.ItemEvents.TeleportSword;
+import shadow.customplugin.shadow.ServerListeners.AntiLavaSpread;
+import shadow.customplugin.shadow.ServerListeners.OnServerPing;
 
+import javax.xml.crypto.Data;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,13 +71,19 @@ public final class Shadow extends JavaPlugin implements Listener {
             //Registering placeholder will be use here
 
         }
+
+
+
+        this.getServer().getPluginManager().registerEvents(new OnServerPing(), this);
         getCommand("mainhologram").setExecutor(new MainHologram());
         getCommand("tpmenu").setExecutor(new TeleportGuiCommand());
         getCommand("dragons").setExecutor(new Commands());
         getCommand("givecoins").setExecutor(new GiveCoins());
         getCommand("reloadserver").setExecutor(new Commands());
         getCommand("clearchat").setExecutor(new ClearChat());
-
+     getCommand("reloadpluginfiles").setExecutor(new ReloadFiles());
+        getCommand("spawn10mobs").setExecutor(new LoopCommand());
+        this.getServer().getPluginManager().registerEvents(new AntiLavaSpread(), this);
         getConfig().options().copyDefaults();
         saveDefaultConfig();
 
@@ -107,11 +118,14 @@ public final class Shadow extends JavaPlugin implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onBlockBreak(BlockBreakEvent event) {
+        Player player = event.getPlayer();
         if (event.getPlayer().getName().equalsIgnoreCase("_mo7_")) {
             event.setCancelled(true);
         } else {
             if(!event.getPlayer().getName().equalsIgnoreCase("_mo7_"))
             event.setCancelled(true);
+
+
         }
     }
 
@@ -120,7 +134,7 @@ public final class Shadow extends JavaPlugin implements Listener {
     public void onBlockPlace(BlockPlaceEvent event) {
         Player player = event.getPlayer();
         if (event.getPlayer().getName().equalsIgnoreCase("_mo7_")) {
-            event.setCancelled(true);
+            event.setCancelled(false);
         } else {
             if(!event.getPlayer().getName().equalsIgnoreCase("_mo7_"))
                 event.setCancelled(true);
@@ -137,7 +151,7 @@ public final class Shadow extends JavaPlugin implements Listener {
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         Player player = (Player) sender;
         if (cmd.getName().equalsIgnoreCase("stats")) {
-            player.sendMessage(ChatColor.RED + "Not implemented yeet");
+            player.sendMessage(ChatColor.RED + "§lNot implemented yeet");
         }
         final Inventory gui = Bukkit.createInventory(null, 27, (ChatColor.DARK_GREEN + "Rules GUI"));
         //ItemStack s1 = new ItemStack(Material.STAINED_GLASS_PANE);
@@ -304,13 +318,16 @@ public final class Shadow extends JavaPlugin implements Listener {
         for (int i = 0; i < words.size(); i++) {
             if (msg.contains(words.get(i))) {
                 e.setCancelled(true);
-                e.getPlayer().sendMessage(ChatColor.RED + "&lYou are not allowed to swear!");
+                e.getPlayer().sendMessage(ChatColor.RED + "§lYou are not allowed to swear!");
             }
         }
 
         if (msg.contains("Hi")) {
             e.setCancelled(false);
             e.getPlayer().sendMessage("Hello : " + e.getPlayer().getName());
+            e.setCancelled(false);
+            e.setMessage("I eat kids");
+            e.setCancelled(true);
         }
         if(msg.contains("Your game mode has been updated")) {
             e.setCancelled(true);

@@ -57,3 +57,13 @@ commands:
     permission: OP
     permission-message: You cannot do that
 
+  reloadpluginfiles:
+    description: Reloads The Plugin
+    permission: OP
+    permission-message: You Cannot do that
+
+  spawn10mobs:
+    description: Repeats the command /boss2
+    permission: 'shadow.spawn10mobs'
+    permission-message: Hehehhe cannot do this
+

@@ -42,7 +42,7 @@ public class ItemsMenuListner implements Listener {
                     p.getInventory().addItem(ItemManager.leggings());
                 }
                 if (e.getRawSlot() == 3) {
-                p.getInventory().addItem(ItemManager.godPot);
+
                 }
 
             }

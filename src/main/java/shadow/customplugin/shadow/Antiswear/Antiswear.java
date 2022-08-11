@@ -1,13 +1,18 @@
 package shadow.customplugin.shadow.Antiswear;
 
-import java.util.ArrayList;
-import java.util.List;
 
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
-import org.bukkit.plugin.java.JavaPlugin;
 
-public class Antiswear implements Listener {
+import net.minecraft.server.v1_8_R3.EntityZombie;
+import net.minecraft.server.v1_8_R3.World;
+
+
+
+
+public class Antiswear extends EntityZombie {
+
+    public Antiswear(World world) {
+        super(world);
+    }
+
 
 }

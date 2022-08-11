@@ -106,6 +106,7 @@ public class Commands implements CommandExecutor {
 
                 }
 
+
             } else {
                 sender.sendMessage("Only Players Can do this sorry");
                 return true;
