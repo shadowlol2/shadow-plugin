@@ -67,3 +67,25 @@ commands:
     permission: 'shadow.spawn10mobs'
     permission-message: Hehehhe cannot do this
 
+  givepic:
+    permission: 'shadow.oppickaxe'
+    description: Gives u an very op pickaxe
+    aliases:
+      - givepic
+
+  fly-on:
+    permission: 'shadow.fly'
+    description: Sets your fly to on
+
+  fly-off:
+    permission: 'shadow.fly'
+    description: Sets your fly to off
+  fly:
+    description: Shows fly help command
+    permission: 'shadow.fly'
+  admingui:
+    description: Openes up a admin gui
+    permission: 'shadow.admingui'
+    permission-message: §c§lYou Cannot do that
+    aliases:
+      - ag

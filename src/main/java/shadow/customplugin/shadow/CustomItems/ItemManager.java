@@ -3,6 +3,7 @@ package shadow.customplugin.shadow.CustomItems;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import org.bukkit.*;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -29,7 +30,8 @@ public class ItemManager {
     public static ItemStack customworkbench;
     public static ItemStack sceptre;
     public static ItemStack godPot;
-
+    public static ItemStack oppickaxeitem;
+    public static ItemStack admincook;
 
     public static void init() {
         createTripleShotBow();
@@ -47,6 +49,8 @@ public class ItemManager {
         Createcustomitems();
         CreateWorkbenchitem();
         createSceptre();
+        createopAsfPickaxe();
+        createAdminTool();
     }
 
     public static void createTripleShotBow() {
@@ -304,10 +308,64 @@ public class ItemManager {
         ItemStack item4 = new ItemStack(Material.YELLOW_FLOWER, 1);
         ItemMeta meta = item4.getItemMeta();
         meta.setDisplayName("Spirit Sceptre");
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("Shoots bats my g");
+        meta.setLore(lore);
         item4.setItemMeta(meta);
         sceptre = item4;
 
     }
+
+
+
+    public static void createopAsfPickaxe() {
+        ItemStack oppickaxe = new ItemStack(Material.DIAMOND_PICKAXE);
+        ItemMeta meta = oppickaxe.getItemMeta();
+        meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&c&lVery Op Pickaxe"));
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add(ChatColor.translateAlternateColorCodes('&' , "&6&lAn very op" +
+                " pickaxe" +
+                "that was made using java" +
+                " skript sucks  ass"));
+        meta.addEnchant(Enchantment.DIG_SPEED, 1000, false);
+        meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        meta.addItemFlags(ItemFlag.HIDE_DESTROYS);
+        meta.spigot().setUnbreakable(true);
+
+
+    meta.setLore(lore);
+    oppickaxe.setItemMeta(meta);
+    oppickaxeitem = oppickaxe;
+    }
+
+    public static void createAdminTool() {
+        ItemStack admincook1 = new ItemStack(Material.COOKIE);
+        ItemMeta meta = admincook1.getItemMeta();
+        meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&c&lAdmins Cookie"));
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add(ChatColor.translateAlternateColorCodes('&' , "&6&lAdmins Cookies" +
+                "" +
+                " Only Admins own this item" +
+                " this item is " +
+                "dangerous" +
+                "&7" +
+                "" +
+                "&6&l&k1 &6&lLEGENDARY ADMIN ITEM &6&l&k1"));
+        meta.addEnchant(Enchantment.DIG_SPEED, 1000, false);
+        meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        meta.addItemFlags(ItemFlag.HIDE_DESTROYS);
+        meta.spigot().setUnbreakable(true);
+        meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
+
+        meta.setLore(lore);
+        admincook1.setItemMeta(meta);
+        admincook = admincook1;
+    }
+
+
+
 
     /*private static void createGodPot() {
         ItemStack head = new ItemStack(Material.SKULL_ITEM, 1, (short)3);

@@ -61,7 +61,7 @@ public class Commands implements CommandExecutor {
                     zombie.setBaby(false);
                     zombie.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 10000, 10000));
                     zombie.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 1000, 1000000));
-
+                      zombie.teleport(player.getLocation())   ;
                 }
 
                 if (cmd.getName().equalsIgnoreCase("reloadserver")) {
@@ -105,7 +105,25 @@ public class Commands implements CommandExecutor {
                     }
 
                 }
-
+                String shadowpluginflex = ChatColor.translateAlternateColorCodes('&', "&c&l[Shadow Plugin] ");
+                if(player.hasPermission("shadow.fly")) {
+                    if(cmd.getName().contains("fly-on")) {
+                        player.setAllowFlight(true);
+                        player.sendMessage(shadowpluginflex + "§c§lSET YOUR FLIGHT TO TRUE");
+                    }
+                }
+              //  String shadowpluginflex = ChatColor.translateAlternateColorCodes('&', "&c&l[Shadow Plugin]");
+                if(player.hasPermission("shadow.fly")) {
+                    if(cmd.getName().contains("fly-off")) {
+                        player.setAllowFlight(false);
+                        player.sendMessage(shadowpluginflex + "§c§lSET YOUR FLIGHT TO FALSE");
+                    }
+                }
+                if(player.hasPermission("shadow.fly")) {
+                    if(cmd.getName().equalsIgnoreCase("fly")) {
+                        player.sendMessage(shadowpluginflex + "§c§lUsage /fly-(off-on)");
+                    }
+                }
 
             } else {
                 sender.sendMessage("Only Players Can do this sorry");

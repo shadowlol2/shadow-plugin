@@ -39,6 +39,7 @@ public class TeleportGuiCommand implements CommandExecutor {
                 teleportgui.setItem(51, ItemManager.S1blank);
                 teleportgui.setItem(52, ItemManager.S1blank);
                 teleportgui.setItem(53, ItemManager.S1blank);
+                teleportgui.setItem(3 , ItemManager.oppickaxeitem);
                 player.openInventory(teleportgui);
             }
         }

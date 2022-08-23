@@ -3,6 +3,7 @@ import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 
 import org.bukkit.Bukkit;
 import org.bukkit.block.Block;
+import org.bukkit.craftbukkit.v1_8_R3.CraftWorld;
 import org.bukkit.entity.Player;
 import org.bukkit.*;
 import org.bukkit.command.Command;
@@ -23,16 +24,22 @@ import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scheduler.BukkitRunnable;
 import shadow.customplugin.shadow.Commands.*;
 import shadow.customplugin.shadow.CustomItems.GodPot;
 import shadow.customplugin.shadow.CustomItems.ItemManager;
+import shadow.customplugin.shadow.CustomMobs.TestMobs;
 import shadow.customplugin.shadow.DamageListeners.Aotvdamage;
+import shadow.customplugin.shadow.GuiListeners.AdminGuiListener;
 import shadow.customplugin.shadow.GuiListeners.GuiListnerforall;
 import shadow.customplugin.shadow.GuiListeners.ItemsMenuListner;
 import shadow.customplugin.shadow.GuiListeners.TeleportmenuGuilistner;
+import shadow.customplugin.shadow.ItemEvents.SuperOpPickaxe;
 import shadow.customplugin.shadow.ItemEvents.TeleportSword;
 import shadow.customplugin.shadow.ServerListeners.AntiLavaSpread;
+import shadow.customplugin.shadow.ServerListeners.OnPlayerBreak;
 import shadow.customplugin.shadow.ServerListeners.OnServerPing;
+import shadow.customplugin.shadow.guis.adminsgui;
 
 import javax.xml.crypto.Data;
 import java.util.ArrayList;
@@ -44,6 +51,8 @@ public final class Shadow extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
         // Plugin startup logic
+
+
         System.out.println("Loading Plugin!");
         System.out.println("25%");
         System.out.println("50%");
@@ -52,8 +61,10 @@ public final class Shadow extends JavaPlugin implements Listener {
         System.out.println("Shadow Plugin has start!");
         getServer().getPluginManager().registerEvents(this, this); //handles the event
         //  getServer().getPluginManager().registerEvents(new GuiListner(), this);
+        this.getServer().getPluginManager().registerEvents(new AdminGuiListener(), this);
         ItemManager.init();
         getCommand("term").setExecutor(new Commands());
+        getCommand("admingui").setExecutor(new adminsgui());
         getCommand("RulesSign").setExecutor(new Commands());
         //    getCommand("kill").setExecutor(new Commands());
         getCommand("gmc").setExecutor(new Commands());
@@ -67,13 +78,15 @@ public final class Shadow extends JavaPlugin implements Listener {
         this.getServer().getPluginManager().registerEvents(new GuiListnerforall(), this);
         this.getServer().getPluginManager().registerEvents(new ItemsMenuListner(), this);
         getServer().getPluginManager().registerEvents(new TeleportmenuGuilistner(), this);
+        getCommand("fly").setExecutor(new Commands());
+        getCommand("fly-on").setExecutor(new Commands());
+        getCommand("fly-off").setExecutor(new Commands());
         if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
             //Registering placeholder will be use here
 
         }
 
-
-
+        this.getServer().getPluginManager().registerEvents(new SuperOpPickaxe(), this);
         this.getServer().getPluginManager().registerEvents(new OnServerPing(), this);
         getCommand("mainhologram").setExecutor(new MainHologram());
         getCommand("tpmenu").setExecutor(new TeleportGuiCommand());
@@ -83,9 +96,11 @@ public final class Shadow extends JavaPlugin implements Listener {
         getCommand("clearchat").setExecutor(new ClearChat());
      getCommand("reloadpluginfiles").setExecutor(new ReloadFiles());
         getCommand("spawn10mobs").setExecutor(new LoopCommand());
+        getCommand("givepic").setExecutor(new OpPickaxecommand());
         this.getServer().getPluginManager().registerEvents(new AntiLavaSpread(), this);
         getConfig().options().copyDefaults();
         saveDefaultConfig();
+        this.getServer().getPluginManager().registerEvents(new OnPlayerBreak(), this);
 
 
         //for anti swear
@@ -107,7 +122,7 @@ public final class Shadow extends JavaPlugin implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         System.out.println("A player has joined the server");
         event.setJoinMessage(null); //Custom welcome message
-
+    //Gives player mining fatigue
     }
 
     @EventHandler
@@ -116,18 +131,26 @@ public final class Shadow extends JavaPlugin implements Listener {
 
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST)
-    public void onBlockBreak(BlockBreakEvent event) {
-        Player player = event.getPlayer();
-        if (event.getPlayer().getName().equalsIgnoreCase("_mo7_")) {
-            event.setCancelled(true);
-        } else {
-            if(!event.getPlayer().getName().equalsIgnoreCase("_mo7_"))
-            event.setCancelled(true);
 
 
+
+        @EventHandler(priority = EventPriority.HIGHEST)
+        public void onBlockBreak(BlockBreakEvent event) {
+            Player player = event.getPlayer();
+
+            if (event.getPlayer().getName().equalsIgnoreCase("_mo7_")) {
+              event.setCancelled(true);
+              event.setExpToDrop(111111111);
+                player.sendMessage(ChatColor.RED + "§lHey!, you are not allowed to do this");
+            } else {
+
+                if (!event.getPlayer().getName().equalsIgnoreCase("_mo7_")) {
+                    event.setCancelled(true);
+                    player.sendMessage(ChatColor.RED + "§lHey!, you are not allowed to do this");
+                }
+
+            }
         }
-    }
 
 
     @EventHandler(priority = EventPriority.HIGHEST)
@@ -135,9 +158,12 @@ public final class Shadow extends JavaPlugin implements Listener {
         Player player = event.getPlayer();
         if (event.getPlayer().getName().equalsIgnoreCase("_mo7_")) {
             event.setCancelled(false);
+            player.sendMessage(ChatColor.RED + "§lHey!, you are not allowed to do this");
+
         } else {
             if(!event.getPlayer().getName().equalsIgnoreCase("_mo7_"))
                 event.setCancelled(true);
+                  player.sendMessage(ChatColor.RED + "§lHey!, you are not allowed to do this");
         }
         }
      //disables block placing
@@ -314,6 +340,7 @@ public final class Shadow extends JavaPlugin implements Listener {
     @EventHandler
     public void onPlayerChat(AsyncPlayerChatEvent e) {
         String msg = e.getMessage();
+
         List<String> words = getConfig().getStringList("words");
         for (int i = 0; i < words.size(); i++) {
             if (msg.contains(words.get(i))) {

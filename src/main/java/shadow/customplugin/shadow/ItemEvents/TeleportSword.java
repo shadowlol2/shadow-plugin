@@ -18,6 +18,7 @@ import org.bukkit.util.Vector;
 import shadow.customplugin.shadow.CustomItems.ItemManager;
 import shadow.customplugin.shadow.Shadow;
 
+import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
@@ -40,12 +41,13 @@ public class TeleportSword implements Listener {
                 player.teleport(location);
                 player.playSound(player.getLocation(), Sound.ENDERMAN_TELEPORT, 5, 5);
                 player.sendMessage("§2Used §6Ether Transmission§2! §9(0 Mana)");
+
             }
 
         }
 
-
-
-
     }
-}
+    }
+
+
+

@@ -1,9 +1,12 @@
 package shadow.customplugin.shadow.ServerListeners;
 
 
+import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockIgniteEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 
 public class AntiLavaSpread implements Listener {
 
