@@ -37,7 +37,6 @@ jobs:
     - name: Add Jar to GitHub releases
       uses: "marvinpinto/action-automatic-releases@latest"
       with:
-        repo_token: "${{ secrets.PASSWORD }}"
         automatic_release_tag: "latest"
         prerelease: false
         title: "Automatic Build from Pull Request"
